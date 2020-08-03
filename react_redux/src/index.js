@@ -6,10 +6,10 @@ import thunk from 'redux-thunk';
 // import reducer from './reducer/counter';
 import Home from './home';
 import rootReduce from './reducer'
-
-import { Provider } from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension' //redux 浏览器插件
+import { Provider } from 'react-redux';//全局注入
 // 创建store仓库
-const store = createStore(rootReduce, applyMiddleware(logger, thunk));
+const store = createStore(rootReduce, composeWithDevTools(applyMiddleware(logger, thunk)));
 
 ReactDOM.render(
   <React.StrictMode>

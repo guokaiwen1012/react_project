@@ -1,4 +1,4 @@
-import { ADDS, FETCH_USER_SUCCESS } from '../constants';
+import { ADDS, FETCH_USER_SUCCESS,FETCH_USER_LOADING,FETCH_USER_FAIL } from '../constants';
 
 // function concat (data) {
 //     console.log(data);
@@ -18,7 +18,9 @@ import { ADDS, FETCH_USER_SUCCESS } from '../constants';
 
 const initState = {
     data: [],
-    user: {}
+    user: {},
+    isLoading:false,
+    error:null
 }
 
 const user = (state = initState, action) => {
@@ -29,7 +31,21 @@ const user = (state = initState, action) => {
             })
         case FETCH_USER_SUCCESS:
             return {
+                isLoading:false,
+                error:null,
                 user: action.user
+            }
+        case FETCH_USER_LOADING:
+            return {
+                isLoading:true,
+                error:null,
+                user: {}
+            }
+        case FETCH_USER_FAIL:
+            return {
+                isLoading:false,
+                error:action.error,
+                user: {}
             }
         default:
             return state

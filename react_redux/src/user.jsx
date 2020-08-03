@@ -10,11 +10,22 @@ class User extends Component {
     }
 
     render () {
-        console.log(this.props);
+        
+        const {user,isLoading,error} = this.props.user;
+        let data;
+
+        if(error){
+            data = error;
+        }else if(isLoading){
+            data = '正在加载中...';
+        }else{
+            data = user.title;
+        }
+
         return (
             <div className="container">
                 <p>user:{this.props.user.data}</p>
-                <p>title:{this.props.user.user.title}</p>
+                <p>title:{data}</p>
                 <button onClick={() => this.props.userActions.add()}>添加</button>
                 <button onClick={() => this.props.userActions.fetch_get()}>请求</button>
             </div>
